@@ -1,0 +1,7 @@
+#To run the project on Docker you should to excute the folwing line command:
+-If your environment is windows
+docker compose up -d --build
+-Else
+Right click on the file docker-compose.yml and choose "Compose Up"
+#Or to Run only Frontend only (backend only ) click on "Compose Up-Select Services"
+#To run the project without docker you can excutes the both scripts "backend" in the "root" of the project and "start" in "client" directory by using "npm run 'script name'"

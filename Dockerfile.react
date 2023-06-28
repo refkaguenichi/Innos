@@ -1,0 +1,27 @@
+# Base image for building React app
+FROM node:14 as builder
+
+# Set working directory for the React app
+WORKDIR /usr/src/app/client
+
+# Copy package files and install dependencies
+COPY client/package*.json ./
+RUN npm install
+
+# Copy the application code
+COPY client ./
+
+# Build the React app
+RUN npm run build
+
+# Production-ready image
+FROM nginx:alpine
+
+# Copy the build files to Nginx server
+COPY --from=builder /usr/src/app/client/build /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
