@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { registerUser } from '../JS/authSlice';
 
@@ -67,6 +67,11 @@ const Register = () => {
             onChange={handleInputChange}
           />
         </div>
+        <span className='text-muted'>
+          You already have an account 
+          <Link to='/login'> Login</Link>
+          </span>
+          <br/>
         <button type="submit" className='btn btn-primary mt-3'>Register</button>
         {error && <span className='text-danger'>{error}</span>}
       </form>

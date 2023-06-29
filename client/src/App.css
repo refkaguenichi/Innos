@@ -20,22 +20,8 @@
   text-decoration: none;
 }
 
-.navbar button {
-  color: #fff;
-  background: purple;
-  border: none;
-  cursor: pointer;
-}
-
-.navbar button.logout {
-  background: orange;
-}
-
-.navbar button:hover {
-  text-decoration: underline;
-}
 .authenticate{
-  max-width: 250px;
+  max-width: 300px;
   margin: 10px auto;
 }
 

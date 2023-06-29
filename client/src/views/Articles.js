@@ -1,13 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchArticles } from '../JS/articlesSlice';
+import Article from '../components/Article';
 
 const Articles = () => {
-  return (
-    <div className='articles'>
-    {[{id:'1', title:'aaaaaa'}, {id:'2', title:'bbbbbbb'}, {id:'1', title:'ccccccc'}].map((article) => (
-      <div key={article.id}>{article.title}</div>
-    ))}
-  </div>
-  )
-}
+  const dispatch = useDispatch();
+  const query = useSelector((state) => state.articles.query);
+  const articles = useSelector((state) => state.articles.articles);
+  const status = useSelector((state) => state.articles.status);
+  const error = useSelector((state) => state.articles.error);
+  useEffect(() => {
+    dispatch(fetchArticles(query));
+  }, [dispatch, query]);
 
-export default Articles
+  return (
+    <>
+    {status === 'failed' ? <div>Error: {error}</div>
+    :status === 'loading'? <div>Loading...</div>:
+    <div className='articles'>
+      {articles.length!==0 && <span className='fw-bold'>There is {articles.length} articles</span>}
+      {articles.length!==0 ? articles.map((article) => (
+        <Article article={article}/>
+      )):<div>There is No articles!</div>}
+    </div>}
+
+    </>
+  );
+};
+
+export default Articles;

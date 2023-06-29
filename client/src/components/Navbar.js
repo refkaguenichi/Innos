@@ -14,17 +14,20 @@ const Navbar = () => {
   return (
     <nav className="navbar">
     <ul>
+    <li>
+        <Link to="/" className='fw-bold'>Innoscripta</Link>
+      </li>
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/">Articles</Link>
       </li>
       {!isAuthenticated && (
         <li>
-          <Link to="/login">Login</Link>
+          <Link to="/login" className='btn btn-light text-dark'>Login</Link>
         </li>
       )}
       {isAuthenticated && (
         <li>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} className='btn btn-light text-dark'>Logout</button>
         </li>
       )}
     </ul>
