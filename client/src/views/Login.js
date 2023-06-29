@@ -57,8 +57,8 @@ const Login = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Login</button>
-        {error && <p>{error}</p>}
+        <button type="submit" className='btn btn-primary mt-3'>Login</button>
+        {error && <span className='text-danger'>{error}</span>}
       </form>
     </div>
     );

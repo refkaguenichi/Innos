@@ -57,7 +57,7 @@ const Register = () => {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div >
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -67,8 +67,8 @@ const Register = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Login</button>
-        {error && <p>{error}</p>}
+        <button type="submit" className='btn btn-primary mt-3'>Register</button>
+        {error && <span className='text-danger'>{error}</span>}
       </form>
       </div>
     );

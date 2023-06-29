@@ -31,8 +31,8 @@ export const logoutUser = createAsyncThunk('/logout', async () => {
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    isAuthenticated: false,
-    token: null,
+    isAuthenticated: !!localStorage.getItem('token'), // Check if token exists in local storage
+    token: localStorage.getItem('token'),
     error: null,
   },
   reducers: {},
@@ -44,6 +44,8 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isAuthenticated = true;
         state.token = action.payload.token;
+        // Store token in local storage
+        localStorage.setItem('token', action.payload.token);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.error = action.error.message;
@@ -54,6 +56,8 @@ const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isAuthenticated = true;
         state.token = action.payload.token;
+        // Store token in local storage
+        localStorage.setItem('token', action.payload.token);
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.error = action.error.message;
@@ -64,6 +68,8 @@ const authSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state) => {
         state.isAuthenticated = false;
         state.token = null;
+        // Remove token from localstorage
+        localStorage.removeItem('token');
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.error = action.error.message;

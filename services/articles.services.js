@@ -10,7 +10,8 @@ exports.getParams=(q)=>{
             params : {
                 // q: query,
                 'api-key': apiKey,
-               }
+               },
+               resultType:(response)=> {return response?.data?.response?.docs}
             }
        case 'newsapi.org':
             apiKey = 'f73d27a1aa8746a4ad7fdbcad0c2e9ee'
@@ -18,9 +19,10 @@ exports.getParams=(q)=>{
             return {
             url : 'https://newsapi.org/v2/everything?q=apple&from=2023-06-25&to=2023-06-25&sortBy=popularity',
             params : {
-                q: query,
+                // q: query,
                 'apiKey': apiKey,
-              }
+              },
+              resultType:(response)=> {return response?.data?.articles}
             }
        case 'newsapi':
         apiKey = 'b3f68329-19c2-48e5-95c4-e9ce2e248e75'
@@ -28,10 +30,10 @@ exports.getParams=(q)=>{
         return {
             url: 'https://eventregistry.org/api/v1/article/getArticles?resultType=articles&keyword=Bitcoin&keyword=Ethereum&keyword=Litecoin&keywordOper=or&lang=eng&articlesSortBy=date&includeArticleConcepts=true&includeArticleCategories=true&articleBodyLen=300&articlesCount=10',
             params: {
-                q: query,
-               
+                // q: query,
                 'apiKey': apiKey,
-              }
+              },
+              resultType:(response)=> {return response?.data?.articles?.results}
             }
        case 'gnews':
             apiKey = '3e7a29b893db55c18274fdc02f4229e6'
@@ -41,10 +43,19 @@ exports.getParams=(q)=>{
             params :  {
                 // q: query,
                 'apiKey': apiKey,
-                }
+                },
+                resultType:(response)=> {return response?.data?.articles}
             }
        default:
-           return 
-    }
-    
+        apiKey = 'Y6NDArm13Chd2pGikeLoCI4ZWjVZCrh7'
+        query = q.filter || 'technology'
+        return{
+            url : 'https://api.nytimes.com/svc/search/v2/articlesearch.json',
+            params : {
+                // q: query,
+                'api-key': apiKey,
+               },
+               resultType:(response)=> {return response?.data?.response?.docs}
+            } 
+    }  
 }
